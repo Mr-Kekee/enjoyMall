@@ -40,10 +40,8 @@ public class DateTimeUtil {
         return dateTime.toString(STANDARD_FORMAT);
     }
 
-
-
-
     public static void main(String[] args) {
+        System.out.println(dateToStr(new Date(),null));
     }
 
 

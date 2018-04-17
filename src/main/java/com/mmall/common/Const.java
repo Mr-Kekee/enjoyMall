@@ -89,8 +89,6 @@ public class Const {
         String RESPONSE_FAILED = "failed";
     }
 
-
-
     public enum PayPlatformEnum{
         ALIPAY(1,"支付宝");
 

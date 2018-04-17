@@ -11,18 +11,19 @@
 
     <context:component-scan base-package="com.mmall.service" annotation-config="true"/>
 
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="2"/>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <property name="locations">
-            <list>
-                <value>classpath:datasource.properties</value>
-            </list>
-        </property>
-        <property name="fileEncoding" value="utf-8"/>
-    </bean>
-
+    <!--<bean id="propertyConfigurer"-->
+          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="order" value="2"/>-->
+        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:datasource.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="fileEncoding" value="utf-8"/>-->
+    <!--</bean>-->
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:datasource.properties"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driverClassName}"/>
@@ -61,7 +62,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:mappers/*Mapper.xml"></property>
 
-        <!-- 分页插件 -->
+        <!-- 分页插件 sqlMapConfig.xml -->
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">
@@ -87,28 +88,33 @@
     </bean>
 
     <!-- 通知 -->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!-- 传播行为 -->
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="create*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="check*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash; 传播行为 &ndash;&gt;-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="insert*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="create*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="select*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="check*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>-->
 
-            <tx:method name="login" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="register" propagation="SUPPORTS" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
-    <!-- 切面 -->
-    <aop:config>
-        <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* com.mmall.service.*.*(..))"/>
-    </aop:config>
+            <!--<tx:method name="login" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="register" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="pay" propagation="SUPPORTS" read-only="true"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--&lt;!&ndash; 切面 &ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--<aop:advisor advice-ref="txAdvice"-->
+                     <!--pointcut="execution(* com.mmall.service.*.*(..))"/>-->
+    <!--</aop:config>-->
+
+    <aop:aspectj-autoproxy/>
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 </beans>
