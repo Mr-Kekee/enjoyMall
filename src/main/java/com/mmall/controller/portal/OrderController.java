@@ -31,7 +31,7 @@ public class OrderController {
     @Autowired
     private IOrderService iOrderService;
 
-    @RequestMapping("create.do")
+    @RequestMapping("create.html")
     @ResponseBody
     public ServerResponse create(HttpSession session, Integer shippingId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -42,7 +42,7 @@ public class OrderController {
     }
 
 
-    @RequestMapping("cancel.do")
+    @RequestMapping("cancel.html")
     @ResponseBody
     public ServerResponse cancel(HttpSession session, Long orderNo){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -53,7 +53,7 @@ public class OrderController {
     }
 
 
-    @RequestMapping("get_order_cart_product.do")
+    @RequestMapping("get_order_cart_product.html")
     @ResponseBody
     public ServerResponse getOrderCartProduct(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -63,7 +63,7 @@ public class OrderController {
         return iOrderService.getOrderCartProduct(user.getId());
     }
 
-    @RequestMapping("detail.do")
+    @RequestMapping("detail.html")
     @ResponseBody
     public ServerResponse detail(HttpSession session,Long orderNo){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -73,7 +73,7 @@ public class OrderController {
         return iOrderService.getOrderDetail(user.getId(),orderNo);
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping("list.html")
     @ResponseBody
     public ServerResponse list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -83,7 +83,7 @@ public class OrderController {
         return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
     }
 
-    @RequestMapping("pay.do")
+    @RequestMapping("pay.html")
     @ResponseBody
     public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -94,7 +94,7 @@ public class OrderController {
         return iOrderService.pay(orderNo,user.getId(),path);
     }
 
-    @RequestMapping("alipay_callback.do")
+    @RequestMapping("alipay_callback.html")
     @ResponseBody
     public Object alipayCallback(HttpServletRequest request){
         Map<String,String> params = Maps.newHashMap();
@@ -131,7 +131,7 @@ public class OrderController {
         return Const.AlipayCallback.RESPONSE_FAILED;
     }
 
-    @RequestMapping("query_order_pay_status.do")
+    @RequestMapping("query_order_pay_status.html")
     @ResponseBody
     public ServerResponse<Boolean> queryOrderPayStatus(HttpSession session, Long orderNo){
         User user = (User)session.getAttribute(Const.CURRENT_USER);

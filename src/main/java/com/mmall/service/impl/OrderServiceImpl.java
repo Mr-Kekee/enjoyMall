@@ -396,7 +396,7 @@ public class OrderServiceImpl implements IOrderService {
         for(OrderItem orderItem : orderItemList){
             //价格单位是 分
             GoodsDetail goods = GoodsDetail.newInstance(orderItem.getProductId().toString(), orderItem.getProductName(),
-                    BigDecimalUtil.mul(orderItem.getCurrentUnitPrice().doubleValue(),new Double(100).doubleValue()).longValue(),
+                    BigDecimalUtil.mul(orderItem.getCurrentUnitPrice().doubleValue(),new Double(100).doubleValue() ).longValue(),
                     orderItem.getQuantity());
             goodsDetailList.add(goods);
         }
@@ -433,7 +433,7 @@ public class OrderServiceImpl implements IOrderService {
 
                 File targetFile = new File(path,qrFileName);
                 String originalFilename = targetFile.getName();
-                String filePath = new DateTime().toString("/yyyy/MM/dd");//最前已加 /
+                String filePath = new DateTime().toString("/yyyy/MM/dd");//最前已加文件符号 /
                 try {
                     FTPUtil.uploadFile(PropertiesUtil.getProperty("ftp.server.ip"),
                             Integer.parseInt(PropertiesUtil.getProperty("ftp.server.port")),

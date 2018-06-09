@@ -20,7 +20,7 @@ public class CartController {
     @Autowired
     private ICartService iCartService;
 
-    @RequestMapping("list.do")
+    @RequestMapping("list.html")
     @ResponseBody
     public ServerResponse<CartVo> list(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -30,7 +30,7 @@ public class CartController {
         return iCartService.list(user.getId());
     }
 
-    @RequestMapping("add.do")
+    @RequestMapping("add.html")
     @ResponseBody
     public ServerResponse<CartVo> add(HttpSession session, Integer count, Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -40,7 +40,7 @@ public class CartController {
         return iCartService.add(user.getId(),productId,count);
     }
 
-    @RequestMapping("update.do")
+    @RequestMapping("update.html")
     @ResponseBody
     public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -50,7 +50,7 @@ public class CartController {
         return iCartService.update(user.getId(),productId,count);
     }
 
-    @RequestMapping("delete_product.do")
+    @RequestMapping("delete_product.html")
     @ResponseBody
     public ServerResponse<CartVo> deleteProduct(HttpSession session,String productIds){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -60,7 +60,7 @@ public class CartController {
         return iCartService.deleteProduct(user.getId(),productIds);
     }
 
-    @RequestMapping("select_all.do")
+    @RequestMapping("select_all.html")
     @ResponseBody
     public ServerResponse<CartVo> selectAll(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -70,7 +70,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),null,Const.Cart.CHECKED);
     }
 
-    @RequestMapping("un_select_all.do")
+    @RequestMapping("un_select_all.html")
     @ResponseBody
     public ServerResponse<CartVo> unSelectAll(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -80,7 +80,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),null,Const.Cart.UN_CHECKED);
     }
 
-    @RequestMapping("select.do")
+    @RequestMapping("select.html")
     @ResponseBody
     public ServerResponse<CartVo> select(HttpSession session,Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -90,7 +90,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
     }
 
-    @RequestMapping("un_select.do")
+    @RequestMapping("un_select.html")
     @ResponseBody
     public ServerResponse<CartVo> unSelect(HttpSession session,Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -100,7 +100,7 @@ public class CartController {
         return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.UN_CHECKED);
     }
 
-    @RequestMapping("get_cart_product_count.do")
+    @RequestMapping("get_cart_product_count.html")
     @ResponseBody
     public ServerResponse<Integer> getCartProductCount(HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);

@@ -22,7 +22,7 @@ public class ShippingController {
     @Autowired
     private IShippingService iShippingService;
 
-    @RequestMapping("add.do")
+    @RequestMapping("add.html")
     @ResponseBody
     public ServerResponse add(HttpSession session,Shipping shipping){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -32,7 +32,7 @@ public class ShippingController {
         return iShippingService.add(user.getId(),shipping);
     }
 
-    @RequestMapping("del.do")
+    @RequestMapping("del.html")
     @ResponseBody
     public ServerResponse del(HttpSession session,Integer shippingId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -42,7 +42,7 @@ public class ShippingController {
         return iShippingService.del(user.getId(),shippingId);
     }
 
-    @RequestMapping("update.do")
+    @RequestMapping("update.html")
     @ResponseBody
     public ServerResponse update(HttpSession session,Shipping shipping){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -53,7 +53,7 @@ public class ShippingController {
     }
 
 
-    @RequestMapping("select.do")
+    @RequestMapping("select.html")
     @ResponseBody
     public ServerResponse<Shipping> select(HttpSession session,Integer shippingId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -63,7 +63,7 @@ public class ShippingController {
         return iShippingService.select(user.getId(),shippingId);
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping("list.html")
     @ResponseBody
     public ServerResponse<PageInfo> list(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "10")int pageSize,

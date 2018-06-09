@@ -34,7 +34,7 @@ public class ProductManageController {
     @Autowired
     private IFileService iFileService;
 
-    @RequestMapping("save.do")
+    @RequestMapping("save.html")
     @ResponseBody
     public ServerResponse productSave(HttpSession session, Product product){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -48,7 +48,7 @@ public class ProductManageController {
         }
     }
 
-    @RequestMapping("set_sale_status.do")
+    @RequestMapping("set_sale_status.html")
     @ResponseBody
     public ServerResponse setSaleStatus(HttpSession session, Integer productId,Integer status){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -62,7 +62,7 @@ public class ProductManageController {
         }
     }
 
-    @RequestMapping("detail.do")
+    @RequestMapping("detail.html")
     @ResponseBody
     public ServerResponse getDetail(HttpSession session, Integer productId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -78,7 +78,7 @@ public class ProductManageController {
         }
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping("list.html")
     @ResponseBody
     public ServerResponse getList(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
@@ -95,7 +95,7 @@ public class ProductManageController {
         }
     }
 
-    @RequestMapping("search.do")
+    @RequestMapping("search.html")
     @ResponseBody
     public ServerResponse productSearch(HttpSession session,String productName,Integer productId, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum
             ,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
@@ -112,7 +112,7 @@ public class ProductManageController {
         }
     }
 
-    @RequestMapping("upload.do")
+    @RequestMapping("upload.html")
     @ResponseBody
     public ServerResponse upload(HttpSession session,@RequestParam(value = "upload_file",required = false) MultipartFile file,HttpServletRequest request){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
@@ -133,7 +133,7 @@ public class ProductManageController {
     }
 
 
-    @RequestMapping("richtext_img_upload.do")
+    @RequestMapping("richtext_img_upload.html")
     @ResponseBody
     public Map richtextImgUpload(HttpSession session, @RequestParam(value = "upload_file",required = false) MultipartFile file,
                                  HttpServletRequest request, HttpServletResponse response){

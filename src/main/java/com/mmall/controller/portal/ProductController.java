@@ -17,13 +17,13 @@ public class ProductController {
     @Autowired
     private IProductService iProductService;
 
-    @RequestMapping("detail.do")
+    @RequestMapping("detail")
     @ResponseBody
     public ServerResponse<ProductDetailVo> detail(Integer productId){
         return iProductService.getProductDetail(productId);
     }
 
-    @RequestMapping("list.do")
+    @RequestMapping("list")
     @ResponseBody
     public ServerResponse<PageInfo> list(@RequestParam(value = "keyword",required = false)String keyword,
                                          @RequestParam(value = "categoryId",required = false)Integer categoryId,
